@@ -19,9 +19,23 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField]
     private GameObject gridVisualization;
 
+    [SerializeField]
+    private AudioSource source;
+
+    private GridData magnetsData;
+
+    private Renderer previewRenderer;
+
+    private List<GameObject> placedGameObject = new();
     private void Start()
     {
         StopPlacement();
+        magnetsData = new();
+        // previewRenderer = cellIndicator.GetComponentInChildren<Renderer>(); - Teste para visualização
+        if (cellIndicator != null)
+            previewRenderer = cellIndicator.GetComponentInChildren<Renderer>();
+        else
+            Debug.LogError("cellIndicator is NULL! Assign it in the Inspector.");
     }
 
     public void StartPlacement(int ID)
@@ -37,6 +51,8 @@ public class PlacementSystem : MonoBehaviour
         cellIndicator.SetActive(true);
         inputManager.OnClicked += PlaceStructure;
         inputManager.OnExit += StopPlacement;
+
+        GridData selectedData = magnetsData;
     }
 
     private void PlaceStructure()
@@ -47,8 +63,32 @@ public class PlacementSystem : MonoBehaviour
         }
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
+
+        bool placementValidity = CheckPlacementValidity(gridPosition, selectedObjectIndex);
+        if (placementValidity == false)
+            return;
+
+        source.Play();
         GameObject newObject = Instantiate(database.objectsData[selectedObjectIndex].Prefab);
         newObject.transform.position = grid.CellToWorld(gridPosition);
+        placedGameObject.Add(newObject);
+        //GridData selectedData = database.objectsData[selectedObjectIndex].ID == 0 ? magnetsData:null; - teste para depois para multiplas classes de objetos
+        GridData selectedData = magnetsData;
+
+        selectedData.AddObjectAt(gridPosition,
+            database.objectsData[selectedObjectIndex].Size,
+            database.objectsData[selectedObjectIndex].ID,
+            placedGameObject.Count - 1);
+
+    }
+
+    private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedObjectIndex)
+    {
+        //GridData selectedData = database.objectsData[selectedObjectIndex].ID == 0 ? magnetsData: null; - teste para depois para multiplas classes de objetos
+
+        GridData selectedData = magnetsData;
+
+        return selectedData.CanPlaceObjectAt(gridPosition, database.objectsData[selectedObjectIndex].Size);
     }
 
     private void StopPlacement()
@@ -66,6 +106,10 @@ public class PlacementSystem : MonoBehaviour
             return;
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
+
+        bool placementValidity = CheckPlacementValidity(gridPosition, selectedObjectIndex);
+        previewRenderer.material.color = placementValidity ? Color.white : Color.red;
+
         mouseIndicator.transform.position = mousePosition;
         cellIndicator.transform.position = grid.CellToWorld(gridPosition);
     }
