@@ -44,8 +44,8 @@ GameObject:
   - component: {fileID: 3366767292992123501}
   - component: {fileID: 1945069075036806000}
   - component: {fileID: 6249955490300062791}
-  - component: {fileID: 2596188107172603847}
   - component: {fileID: 8728545230953711401}
+  - component: {fileID: 5136813025477489377}
   m_Layer: 0
   m_Name: Magnet - N
   m_TagString: Untagged
@@ -139,26 +139,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2596188107172603847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1532884313446893454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32a5e3aba8fa8a24d8b74a286a7b20f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Magnet1
-  north: 1
-  power: 10
 --- !u!135 &8728545230953711401
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -180,3 +166,18 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5136813025477489377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532884313446893454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35d4d7d74f56528468994e5056628901, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MagnetForce
+  forceType: 0
+  power: 10
+  isActive: 1
