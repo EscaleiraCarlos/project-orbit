@@ -12,13 +12,14 @@ public class PlacementState : IBuildingState
     ObjectsDataBaseSO database;
     GridData magnetsData;
     ObjectPlacer objectPlacer;
-
+    SoundFeedback soundFeedback;
     public PlacementState(int iD,
                           Grid grid,
                           PreviewSystem previewSystem,
                           ObjectsDataBaseSO database,
                           GridData magnetsData,
-                          ObjectPlacer objectPlacer)
+                          ObjectPlacer objectPlacer,
+                          SoundFeedback soundFeedback)
     {
         ID = iD;
         this.grid = grid;
@@ -26,6 +27,7 @@ public class PlacementState : IBuildingState
         this.database = database;
         this.magnetsData = magnetsData;
         this.objectPlacer = objectPlacer;
+        this.soundFeedback = soundFeedback;
 
         selectedObjectIndex = database.objectsData.FindIndex(data => data.ID == ID);
         if (selectedObjectIndex > -1)
@@ -36,6 +38,7 @@ public class PlacementState : IBuildingState
         }
         else
             throw new System.Exception($"No object with ID {iD}");
+        this.soundFeedback = soundFeedback;
     }
 
     public void EndState()
@@ -48,9 +51,10 @@ public class PlacementState : IBuildingState
         bool placementValidity = CheckPlacementValidity(gridPosition, selectedObjectIndex);
         if (placementValidity == false)
         {
+            soundFeedback.PlaySound(SoundType.wrongPlacement);
             return;
         }
-
+        soundFeedback.PlaySound(SoundType.Place);
         int index = objectPlacer.PlaceObject(database.objectsData[selectedObjectIndex].Prefab,
             grid.CellToWorld(gridPosition));
 
