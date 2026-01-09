@@ -153,6 +153,7 @@ Transform:
   - {fileID: 1451136138}
   - {fileID: 1236702611}
   - {fileID: 1620497348}
+  - {fileID: 918696996}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &14050967
@@ -7963,6 +7964,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &918696994
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 918696996}
+  - component: {fileID: 918696995}
+  m_Layer: 0
+  m_Name: PreviewSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &918696995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 918696994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8160aae52f8e5b645b6cce8becd4c34f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PreviewSystem
+  previewYOffset: 0.06
+  cellIndicator: {fileID: 1620497347}
+  previewMaterialPrefab: {fileID: 2100000, guid: 80b0b83ae6fad2a42b456526bbb458a0, type: 2}
+--- !u!4 &918696996
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 918696994}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1041262}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &919535774
 GameObject:
   m_ObjectHideFlags: 0
@@ -20422,12 +20470,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlacementSystem
   mouseIndicator: {fileID: 1451136137}
-  cellIndicator: {fileID: 1620497347}
   inputManager: {fileID: 2074611811}
   grid: {fileID: 34696606}
   database: {fileID: 11400000, guid: 34ca5c45ade27f54986064781e07b642, type: 2}
   gridVisualization: {fileID: 499847076}
   source: {fileID: 1999324803}
+  preview: {fileID: 918696995}
 --- !u!82 &1999324803
 AudioSource:
   m_ObjectHideFlags: 0
