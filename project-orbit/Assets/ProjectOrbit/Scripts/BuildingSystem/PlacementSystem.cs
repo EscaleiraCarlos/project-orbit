@@ -111,4 +111,10 @@ public class PlacementSystem : MonoBehaviour
         }
         
     }
+    public void DisablePlacement()
+    {
+        StopPlacement();
+        enabled = false;
+    }
+
 }
